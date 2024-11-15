@@ -1,0 +1,100 @@
+/* HomePage.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo+Black&family=Lilita+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rowdies:wght@300;400;700&family=Spicy+Rice&family=Unbounded:wght@200..900&display=swap');
+
+body {
+  background: linear-gradient(45deg, #004cb6, #0564ad, #d1284a, #FF0000); /* Updated gradient colors */
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* .gradient-background {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #39545B, #547562);
+} */
+
+/* fonts */
+.spicy-rice-regular {
+  font-family: "Spicy Rice", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.rowdies-bold {
+  font-family: "Rowdies", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.unbounded-uniquifier-header {
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.unbounded-uniquifier-p1 {
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 250;
+  font-style: normal;
+}
+.unbounded-uniquifier-p2 {
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 150;
+  font-style: normal;
+}
+
+
+/* header */
+.card-img-top {
+    object-fit: cover;
+    width: 100%;
+    height: 250px; /* Adjust the height as necessary */
+}
+.header-section {
+    background-image: url('https://i.pinimg.com/originals/c7/b5/11/c7b511c3764c719ac4ef779b39fbfde0.gif');
+    background-position: center;
+    background-repeat: repeat-x;
+    height: 500px;
+    width: auto;
+}
+.header-section h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    font-family: "Unbounded", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+.header-section p {
+    display: flex;
+    justify-content: center;
+    font-family: "Rowdies", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+/* welcome section */
+
+
+.Art-card {
+  background-color: #EA8E1D;
+  
+}

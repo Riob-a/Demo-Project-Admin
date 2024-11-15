@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import 'animate.css/animate.min.css';  // Import Animate.css for animations
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
