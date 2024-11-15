@@ -9,9 +9,9 @@ import "./HomePage.css";
 
 // Centralized image URLs
 const imageUrls = {
-  Art: "https://i.pinimg.com/originals/a3/7e/48/a37e48e6e5e0edb1b2ffbee6a73fbd59.gif",
-  Users: "https://i.pinimg.com/564x/10/9a/dd/109addc2397a3257c90b61acccb7a273.jpg",
-  Comments: "https://i.pinimg.com/originals/db/5a/54/db5a547a554cfaebfcb48aa1e8462918.gif",
+  Art: "https://i.pinimg.com/originals/47/17/a8/4717a813263f471b0def42d70c835ad5.gif",
+  Users: "https://i.pinimg.com/originals/6b/b6/28/6bb628a60417e6979fcca2c1124e8e75.gif",
+  Comments: "https://i.pinimg.com/originals/bd/78/b5/bd78b57fa09b08793f3e018bb549b49b.gif",
 };
 
 // Lazy-loaded Image component
