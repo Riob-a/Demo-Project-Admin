@@ -70,7 +70,7 @@ function AdminComments() {
   if (error) return <Alert variant="danger">{error}</Alert>;
 
   return (
-    <Container className="justify-content-center">
+    <Container className="justify-content-center mb-5">
       <Row>
         <Col>
           <h2 className='mb-5 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
@@ -83,7 +83,9 @@ function AdminComments() {
                 key={comment.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                // transition={{ duration: 0.5 }}
               >
                 <Card className="my-3 wow fadeInUp">
                   <Card.Header className='unbounded-uniquifier-header'>{comment.name}</Card.Header>

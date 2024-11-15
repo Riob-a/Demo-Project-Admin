@@ -81,7 +81,7 @@ function AdminUsers() {
     };
 
     return (
-        <Container className="py-4">
+        <Container className="py-4 mb-5">
             <ToastContainer />
             <Row>
                 <h2 className="mb-5 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
@@ -93,9 +93,11 @@ function AdminUsers() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                // transition={{ duration: 0.5 }}
                             >
-                                <Card className="wow fadeInUp shadow-sm h-100">
+                                <Card className="wow fadeInUp shadow-sm h-100 mb-5">
                                     <Card.Body>
                                         <Card.Title className="unbounded-uniquifier-header">{user.username}</Card.Title>
                                         <Card.Text className="unbounded-uniquifier-p1">Email: {user.email}</Card.Text>
