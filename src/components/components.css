@@ -23,7 +23,7 @@
 .navbar .nav-link.active {
     /* text-decoration: underline; */
     font-weight: bold;
-    color: #d1284a;
+    color: #d1284a !important;
   }
 .navbar .dropdown-menu .dropdown-item:hover {
     background-color: #d1284a;

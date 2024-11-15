@@ -36,7 +36,7 @@ function AdminSignIn() {
                     if (result.user.role === 'admin') {
                         navigate('/home'); // Redirect admin to the admin dashboard
                     } else {
-                        navigate("https://demo-project-f-end.vercel.app/home"); // Redirect regular user to the home page
+                        window.location.href = "https://demo-project-f-end.vercel.app/home"; // Redirect regular user to the home page
                     }
                 }, 2000);
             } else {
