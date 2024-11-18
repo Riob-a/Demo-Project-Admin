@@ -30,7 +30,7 @@ function AdminRegister() {
                 // Delay navigation to the admin dashboard by 2 seconds
                 setTimeout(() => {
                     setShowAlert(false); // Hide the alert before redirecting
-                    navigate('/signin'); // Redirect to the admin dashboard
+                    navigate('/'); // Redirect to the admin dashboard
                 }, 2000);
             } else {
                 setMessage(result.message || 'Error registering admin');
