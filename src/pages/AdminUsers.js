@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, ListGroup, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, ListGroup, Modal, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from "framer-motion";
 import WOW from "wowjs";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaSearch } from "react-icons/fa";
 import "./User.css";
 
 function AdminUsers() {
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
     const [selectedUser, setSelectedUser] = useState(null); // Track selected user
     const [userArtworks, setUserArtworks] = useState([]); // Track user's artworks
     const [showModal, setShowModal] = useState(false); // Modal state
+    const [searchQuery, setSearchQuery] = useState(""); // State for search query
     const navigate = useNavigate();
 
     // Timeout
@@ -66,39 +68,44 @@ function AdminUsers() {
         }
     };
 
-    useEffect(() => {
-        const wow = new WOW.WOW();
-        wow.init();
-
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch("http://127.0.0.1:5000/api/users", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-                    },
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setUsers(data);
-                } else if (response.status === 401) {
-                    handleSessionTimeout();
-                } else {
-                    toast.error("Failed to fetch users");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                toast.error("Network error while fetching users");
+    // Fetch all users
+    const fetchUsers = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:5000/api/users", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+                },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setUsers(data);
+                setFilteredUsers(data); // Initially set filteredUsers to all users
+            } else if (response.status === 401) {
+                handleSessionTimeout();
+            } else {
+                toast.error("Failed to fetch users");
             }
-        };
+        } catch (error) {
+            console.error("Error:", error);
+            toast.error("Network error while fetching users");
+        }
+    };
 
-        fetchUsers();
+    // Handle search input change and filter users
+    const handleSearchChange = (event) => {
+        const query = event.target.value.toLowerCase();
+        setSearchQuery(query);
 
-        return () => {
-            wow.sync();
-        };
-    }, [navigate]);
+        // Filter users based on search query
+        const filtered = users.filter(
+            (user) =>
+                user.username.toLowerCase().includes(query) ||
+                user.email.toLowerCase().includes(query)
+        );
+        setFilteredUsers(filtered);
+    };
 
     const handleDelete = async (userId) => {
         try {
@@ -111,6 +118,7 @@ function AdminUsers() {
             });
             if (response.ok) {
                 setUsers(users.filter((user) => user.id !== userId));
+                setFilteredUsers(filteredUsers.filter((user) => user.id !== userId));
                 toast.success("User deleted successfully");
             } else if (response.status === 401) {
                 handleSessionTimeout();
@@ -123,15 +131,36 @@ function AdminUsers() {
         }
     };
 
+    useEffect(() => {
+        const wow = new WOW.WOW();
+        wow.init();
+
+        fetchUsers();
+
+        return () => {
+            wow.sync();
+        };
+    }, [navigate]);
+
     return (
         <Container className="py-4 mb-5">
             <ToastContainer />
             <Row>
                 <h2 className="mb-5 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
-                {users.length === 0 ? (
+                {/* Search Bar */}
+                <Col xs={12} className="mb-4">
+                    <Form.Control
+                        type="text"
+                        placeholder="Search users by username or email " 
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </Col>
+
+                {filteredUsers.length === 0 ? (
                     <p className="text-muted text-center">No users found.</p>
                 ) : (
-                    users.map((user) => (
+                    filteredUsers.map((user) => (
                         <Col key={user.id} xs={12} md={6} lg={4} className="mb-4">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -186,23 +215,22 @@ function AdminUsers() {
                                 <p className="text-muted unbounded-uniquifier-p">No artworks found for this user.</p>
                             ) : (
                                 <Row>
-                                {userArtworks.map((artwork) => (
-                                    <Col key={artwork.id} xs={12} md={6} lg={6} className="mb-3">
-                                        <Card className="shadow-sm">
-                                            <Card.Img variant="top" src={artwork.image_url} alt={artwork.title} />
-                                            <Card.Body>
-                                                <Card.Title>{artwork.title}</Card.Title>
-                                                <Card.Text className="unbounded-uniquifier-p">
-                                                    <strong>Style:</strong> {artwork.style} <br />
-                                                    <strong>Name:</strong> {artwork.name} <br />
-                                                    <strong>Description:</strong> {artwork.description}
-                                                </Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
-            
+                                    {userArtworks.map((artwork) => (
+                                        <Col key={artwork.id} xs={12} md={6} lg={6} className="mb-3">
+                                            <Card className="shadow-sm">
+                                                <Card.Img variant="top" src={artwork.image_url} alt={artwork.title} />
+                                                <Card.Body>
+                                                    <Card.Title>{artwork.title}</Card.Title>
+                                                    <Card.Text className="unbounded-uniquifier-p">
+                                                        <strong>Style:</strong> {artwork.style} <br />
+                                                        <strong>Name:</strong> {artwork.name} <br />
+                                                        <strong>Description:</strong> {artwork.description}
+                                                    </Card.Text>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    ))}
+                                </Row>
                             )}
                         </div>
                     )}
