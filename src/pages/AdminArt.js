@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button, Card, Col, Container, Row, Spinner, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,9 +10,11 @@ import './Art.css'
 
 const AdminArt = () => {
   const [artworks, setArtworks] = useState([]);
+  const [visibleArtworks, setVisibleArtworks] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   // Show toast after token timeout
   const handleSessionTimeout = () => {
@@ -71,6 +73,31 @@ const AdminArt = () => {
     }
   };
 
+    // IntersectionObserver to handle visibility of artworks
+    useEffect(() => {
+      if (!containerRef.current) return; // Ensure containerRef is not null
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleArtworks((prev) => ({
+                ...prev,
+                [entry.target.dataset.id]: true,
+              }));
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+  
+      const elements = containerRef.current.querySelectorAll('.art-card');
+      elements.forEach((element) => observer.observe(element));
+  
+      return () => observer.disconnect();
+    }, [artworks]);
+  
+
   useEffect(() => {
     const wow = new WOW.WOW();
     wow.init();
@@ -88,14 +115,14 @@ const AdminArt = () => {
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       ) : (
-        <Row>
+        <Row className='mb-5'>
           {artworks.length === 0 ? (
             <Alert variant="info">No artworks to display</Alert>
           ) : (
             artworks.map((artwork) => (
-              <Col key={artwork.id} sm={12} md={6} lg={4} className="mb-4 ">
+              <Col key={artwork.id} sm={12} md={6} lg={4} className="mb-4 gy-5 gx-5">
                 <motion.div
-                  className="wow fadeInLeft mx-auto"
+                  className="wow zoomIn mx-auto"
                   style={{ width: "21rem", boxShadow: "0 0px 15px rgba(0, 0, 0, 0.5)" }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

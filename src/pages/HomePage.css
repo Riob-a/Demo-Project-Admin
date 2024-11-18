@@ -83,16 +83,6 @@ body {
     font-weight: 900;
     font-style: normal;
 }
-.header-section p {
-    display: flex;
-    justify-content: center;
-    font-family: "Rowdies", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
-
-/* welcome section */
-
 
 .Art-card {
   background-color: #EA8E1D;

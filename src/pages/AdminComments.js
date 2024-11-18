@@ -90,8 +90,8 @@ function AdminComments() {
                 <Card className="my-3 wow fadeInUp">
                   <Card.Header className='unbounded-uniquifier-header'>{comment.name}</Card.Header>
                   <Card.Body>
-                    <Card.Text className='unbounded-uniquifier-p1'>{comment.message}</Card.Text>
-                    <Card.Subtitle className="unbounded-uniquifier-p2 text-muted">Email: {comment.email}</Card.Subtitle>
+                    <Card.Text className='unbounded-uniquifier-p'>{comment.message}</Card.Text>
+                    <Card.Subtitle className="unbounded-uniquifier-p text-muted">Email: {comment.email}</Card.Subtitle>
                     <Button 
                       variant="danger" 
                       onClick={() => handleDelete(comment.id)}
