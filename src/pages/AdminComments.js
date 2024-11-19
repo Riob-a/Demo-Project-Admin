@@ -25,8 +25,8 @@ function AdminComments() {
   }
 
   useEffect(() => {
-    // Initialize WOW.js animations
-    new WOW.WOW().init();
+    const wow = new WOW.WOW();
+    wow.init();
 
     // Fetch comments on mount
     const fetchComments = async () => {
@@ -91,15 +91,14 @@ function AdminComments() {
     <Container className="justify-content-center mb-5">
       <Row>
         <Col>
-          <h2 className='mb-5 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
+          <h2 className='mb-3 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
           {/* Search bar */}
-          <InputGroup className='mb-4 unbounded-uniquifier-p'>
           <FormControl
           placeholder='Search comments by name, email or message...'
           value={searchQuery}
           onChange={handleSearch}
+          className="wow fadeInLeft unbounded-uniquifier-p" data-wow-delay="0.5s"
           />
-          </InputGroup>
 
           {deleteError && <Alert variant="danger">{deleteError}</Alert>}
           {filteredComments.length === 0 ? (

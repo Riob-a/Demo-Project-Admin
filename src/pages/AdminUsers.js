@@ -146,7 +146,7 @@ function AdminUsers() {
         <Container className="py-4 mb-5">
             <ToastContainer />
             <Row>
-                <h2 className="mb-5 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
+                <h2 className="mb-3 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
                 {/* Search Bar */}
                 <Col xs={12} className="mb-4 unbounded-uniquifier-p">
                     <FormControl
@@ -154,6 +154,7 @@ function AdminUsers() {
                         placeholder="Search users by username or email " 
                         value={searchQuery}
                         onChange={handleSearchChange}
+                        className="wow fadeInLeft" data-wow-delay="0.5s"
                     />
                 </Col>
 
