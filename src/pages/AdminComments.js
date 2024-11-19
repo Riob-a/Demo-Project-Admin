@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Spinner, Alert, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert, Button, FormControl, InputGroup } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import WOW from 'wowjs';
 import { toast } from 'react-toastify';
 
 function AdminComments() {
   const [comments, setComments] = useState([]);
+  const [filteredComments, setFilteredComments] = useState([]); // To store filtered comments
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('')
   const navigate = useNavigate();
 
   // Timeout toast
@@ -35,6 +37,7 @@ function AdminComments() {
           }
         });
         setComments(response.data);
+        setFilteredComments(response.data); // Initially, show all comments
       } catch (err) {
         if (err.response && err.response.status === 401) {
           handleSessionTimeout();
@@ -48,6 +51,7 @@ function AdminComments() {
     fetchComments();
   }, [navigate]);
 
+  // Handle delete comment
   const handleDelete = async (commentId) => {
     try {
       await axios.delete(`http://127.0.0.1:5000/api/contacts/${commentId}`, {
@@ -55,8 +59,9 @@ function AdminComments() {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`
         }
       });
-      // Remove the deleted comment from the comments list
-      setComments(comments.filter(comment => comment.id !== commentId));
+      const updatedComments = comments.filter(comment => comment.id !== commentId);
+      setComments(updatedComments);
+      setFilteredComments(updatedComments);
     } catch (err) {
       if (err.response && err.response.status === 401) {
         handleSessionTimeout();
@@ -64,6 +69,19 @@ function AdminComments() {
         setDeleteError("Failed to delete comment");
       }
     }
+  };
+
+  //Handle search
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+    setFilteredComments(
+      comments.filter(comment =>
+        comment.name.toLowerCase().includes(query) ||
+        comment.email.toLowerCase().includes(query) ||
+        comment.message.toLowerCase().includes(query)
+      )
+    );
   };
 
   if (loading) return <Spinner animation="border" variant="primary" />;
@@ -74,11 +92,20 @@ function AdminComments() {
       <Row>
         <Col>
           <h2 className='mb-5 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
+          {/* Search bar */}
+          <InputGroup className='mb-4 unbounded-uniquifier-p'>
+          <FormControl
+          placeholder='Search comments by name, email or message...'
+          value={searchQuery}
+          onChange={handleSearch}
+          />
+          </InputGroup>
+
           {deleteError && <Alert variant="danger">{deleteError}</Alert>}
-          {comments.length === 0 ? (
-            <Alert variant="info">No comments available.</Alert>
+          {filteredComments.length === 0 ? (
+            <Alert variant="info unbounded-uniquifier-p">No comments available.</Alert>
           ) : (
-            comments.map(comment => (
+            filteredComments.map(comment => (
               <motion.div
                 key={comment.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -91,7 +118,10 @@ function AdminComments() {
                   <Card.Header className='unbounded-uniquifier-header'>{comment.name}</Card.Header>
                   <Card.Body>
                     <Card.Text className='unbounded-uniquifier-p'>{comment.message}</Card.Text>
-                    <Card.Subtitle className="unbounded-uniquifier-p text-muted">Email: {comment.email}</Card.Subtitle>
+                    <Card.Subtitle className="unbounded-uniquifier-p text-muted"><strong>Email:</strong> {comment.email}</Card.Subtitle>
+                    <hr />
+                    <Card.Text className='unbounded-uniquifier-p'><strong>Posted on:</strong> {comment.posted_at}</Card.Text>
+                    <hr />
                     <Button 
                       variant="danger" 
                       onClick={() => handleDelete(comment.id)}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, ListGroup, Modal, Form } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, ListGroup, Modal, FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from "framer-motion";
@@ -148,8 +148,8 @@ function AdminUsers() {
             <Row>
                 <h2 className="mb-5 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
                 {/* Search Bar */}
-                <Col xs={12} className="mb-4">
-                    <Form.Control
+                <Col xs={12} className="mb-4 unbounded-uniquifier-p">
+                    <FormControl
                         type="text"
                         placeholder="Search users by username or email " 
                         value={searchQuery}
@@ -158,7 +158,7 @@ function AdminUsers() {
                 </Col>
 
                 {filteredUsers.length === 0 ? (
-                    <p className="text-muted text-center">No users found.</p>
+                    <p className="text-muted text-center unbounded-uniquifier-p">No users found.</p>
                 ) : (
                     filteredUsers.map((user) => (
                         <Col key={user.id} xs={12} md={6} lg={4} className="mb-4">
