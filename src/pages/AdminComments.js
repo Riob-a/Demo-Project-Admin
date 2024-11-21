@@ -31,7 +31,7 @@ function AdminComments() {
     // Fetch comments on mount
     const fetchComments = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/api/contacts', {
+        const response = await axios.get('https://demo-project-backend-qrd8.onrender.com/api/contacts', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`
           }
@@ -54,7 +54,7 @@ function AdminComments() {
   // Handle delete comment
   const handleDelete = async (commentId) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/api/contacts/${commentId}`, {
+      await axios.delete(`https://demo-project-backend-qrd8.onrender.com/api/contacts/${commentId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`
         }

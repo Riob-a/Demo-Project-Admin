@@ -28,7 +28,7 @@ function AdminUsers() {
     // Fetch user details and their artworks
     const fetchUserDetails = async (userId) => {
         try {
-            const userResponse = await fetch(`http://127.0.0.1:5000/api/users/${userId}`, {
+            const userResponse = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -40,7 +40,7 @@ function AdminUsers() {
                 setSelectedUser(userData);
 
                 // Fetch artworks associated with the user
-                const artworkResponse = await fetch(`http://127.0.0.1:5000/api/users/${userId}/artworks`, {
+                const artworkResponse = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}/artworks`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -71,7 +71,7 @@ function AdminUsers() {
     // Fetch all users
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/users", {
+            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function AdminUsers() {
 
     const handleDelete = async (userId) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/api/users/${userId}`, {
+            const response = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

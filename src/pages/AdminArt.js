@@ -31,10 +31,10 @@ const AdminArt = () => {
     const fetchArtworks = async () => {
       try {
         const [staticResponse, animatedResponse] = await Promise.all([
-          axios.get('http://127.0.0.1:5000/api/artworks/static', {
+          axios.get('https://demo-project-backend-qrd8.onrender.com/api/artworks/static', {
             headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
           }),
-          axios.get('http://127.0.0.1:5000/api/artworks/animated', {
+          axios.get('https://demo-project-backend-qrd8.onrender.com/api/artworks/animated', {
             headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
           }),
         ]);
@@ -58,7 +58,7 @@ const AdminArt = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://127.0.0.1:5000/api/artworks/${id}`, {
+      const response = await axios.delete(`https://demo-project-backend-qrd8.onrender.com/api/artworks/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
       });
       if (response.status === 200) {
