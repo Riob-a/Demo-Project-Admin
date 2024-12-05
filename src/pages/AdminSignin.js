@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Container, Row, Alert } from 'react-bootstrap';
-import WOW from "wowjs";
+import { useWow } from '../hooks/useWow';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'
 
@@ -51,9 +51,7 @@ function AdminSignIn() {
         }
     };
 
-    useEffect(() => {
-        new WOW.WOW().init();
-    }, []);
+    useWow();
 
     return (
         <Container className="justify-content-center mb-5 mt-5">

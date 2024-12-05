@@ -1,97 +1,35 @@
 import React, { useState, useEffect } from 'react'; 
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Spinner, Alert, Button, FormControl, InputGroup } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import WOW from 'wowjs';
-import { toast } from 'react-toastify';
+import { useWow } from '../hooks/useWow';
+import { useFetchComments } from '../hooks/useFetchComments';
 
 function AdminComments() {
-  const [comments, setComments] = useState([]);
-  const [filteredComments, setFilteredComments] = useState([]); // To store filtered comments
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('')
   const navigate = useNavigate();
+  const token = localStorage.getItem('access_token');
 
-  // Timeout toast
-  const handleSessionTimeout = () => {
-    toast.error("Session has expired. Please sign in again.");
-    setTimeout(() => {
-      localStorage.removeItem('access_token');
-      navigate("/");
-    }, 3000);
-  }
+  // Use custom hooks
+  useWow(); // Initialize WOW animations
+  const {
+    filteredComments,
+    loading,
+    error,
+    deleteError,
+    searchQuery,
+    handleDelete,
+    handleSearch,
+  } = useFetchComments(token, navigate);
 
-  useEffect(() => {
-    const wow = new WOW.WOW();
-    wow.init();
 
-    // Fetch comments on mount
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get('https://demo-project-backend-qrd8.onrender.com/api/contacts', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-          }
-        });
-        setComments(response.data);
-        setFilteredComments(response.data); // Initially, show all comments
-      } catch (err) {
-        if (err.response && err.response.status === 401) {
-          handleSessionTimeout();
-        } else {
-          setError("Failed to load comments");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchComments();
-  }, [navigate]);
-
-  // Handle delete comment
-  const handleDelete = async (commentId) => {
-    try {
-      await axios.delete(`https://demo-project-backend-qrd8.onrender.com/api/contacts/${commentId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`
-        }
-      });
-      const updatedComments = comments.filter(comment => comment.id !== commentId);
-      setComments(updatedComments);
-      setFilteredComments(updatedComments);
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        handleSessionTimeout();
-      } else {
-        setDeleteError("Failed to delete comment");
-      }
-    }
-  };
-
-  //Handle search
-  const handleSearch = (event) => {
-    const query = event.target.value.toLowerCase();
-    setSearchQuery(query);
-    setFilteredComments(
-      comments.filter(comment =>
-        comment.name.toLowerCase().includes(query) ||
-        comment.email.toLowerCase().includes(query) ||
-        comment.message.toLowerCase().includes(query)
-      )
-    );
-  };
-
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading) return <Spinner animation="border" variant="white" role='status' className='d-block mx-auto mt-5' />;
   if (error) return <Alert variant="danger">{error}</Alert>;
 
   return (
     <Container className="justify-content-center mb-5">
-      <Row>
-        <Col>
-          <h2 className='mb-3 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
+      <Row className='mb-4'>
+        
+          <h2 className='mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
           {/* Search bar */}
           <FormControl
           placeholder='Search comments by name, email or message...'
@@ -101,6 +39,9 @@ function AdminComments() {
           />
 
           {deleteError && <Alert variant="danger">{deleteError}</Alert>}
+      </Row>
+
+      <Row>
           {filteredComments.length === 0 ? (
             <Alert variant="info unbounded-uniquifier-p">No comments available.</Alert>
           ) : (
@@ -113,6 +54,7 @@ function AdminComments() {
                 whileTap={{ scale: 0.95 }}
                 // transition={{ duration: 0.5 }}
               >
+              
                 <Card className="my-3 wow fadeInUp">
                   <Card.Header className='unbounded-uniquifier-header'>{comment.name}</Card.Header>
                   <Card.Body>
@@ -133,7 +75,7 @@ function AdminComments() {
               </motion.div>
             ))
           )}
-        </Col>
+        
       </Row>
     </Container>
   );

@@ -1,7 +1,7 @@
 // AdminRegister.js
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Container, Row, Alert } from 'react-bootstrap';
-import WOW from "wowjs";
+import { useWow } from '../hooks/useWow';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Register.css'
 
@@ -42,9 +42,7 @@ function AdminRegister() {
         }
     };
 
-    useEffect(() => {
-        new WOW.WOW().init();
-    }, []);
+    useWow();
 
     return (
         <Container className="justify-content-center mb-2 mt-5">

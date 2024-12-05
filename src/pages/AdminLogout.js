@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Alert, Card, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import WOW from "wowjs";
+import { useWow } from '../hooks/useWow';
 
 function AdminLogout() {
     const [message, setMessage] = useState('');
@@ -44,9 +44,7 @@ function AdminLogout() {
         performLogout();
     }, [navigate]);
 
-    useEffect(() => {
-        new WOW.WOW().init();
-    }, []);
+    useWow();
 
     return (
         <Container className="justify-content-center p-5 m-5">

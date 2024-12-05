@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Image, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-import WOW from "wowjs";
+// import WOW from "wowjs";
+import { useWow } from '../hooks/useWow';
 import "animate.css";
 import "./HomePage.css";
 
@@ -48,10 +49,7 @@ const CardComponent = ({ path, imgSrc, title, text, wowDelay, navigateToSection 
 function HomePage() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const wowInstance = new WOW.WOW();
-    wowInstance.init();
-  }, []);
+  useWow();
 
   const navigateToSection = (path) => {
     navigate(path);
