@@ -9,6 +9,7 @@ const useFetchUsers = () => {
     const [userArtworks, setUserArtworks] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const handleSessionTimeout = () => {
@@ -32,14 +33,17 @@ const useFetchUsers = () => {
                 const data = await response.json();
                 setUsers(data);
                 setFilteredUsers(data);
+                setLoading(false);
             } else if (response.status === 401) {
                 handleSessionTimeout();
             } else {
                 toast.error("Failed to fetch users");
+                setLoading(false);
             }
         } catch (error) {
             console.error("Error:", error);
             toast.error("Network error while fetching users");
+            setLoading(false);
         }
     };
 
@@ -135,6 +139,7 @@ const useFetchUsers = () => {
         handleSearchChange,
         handleDelete,
         setShowModal,
+        loading,
     };
 };
 

@@ -29,7 +29,7 @@ function AdminComments() {
     <Container className="justify-content-center mb-5">
       <Row className='mb-4'>
         
-          <h2 className='mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h2>
+          <h1 className='mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h1>
           {/* Search bar */}
           <FormControl
           placeholder='Search comments by name, email or message...'

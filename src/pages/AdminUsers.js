@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, ListGroup, Modal, FormControl } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Container, Row, Col, Card, Button, ListGroup, Modal, FormControl, Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from "framer-motion";
-import WOW from "wowjs";
 import { useWow } from "../hooks/useWow"
 import useFetchUsers from "../hooks/useFetchUsers";
 import { FaArrowRight, FaSearch } from "react-icons/fa";
@@ -21,15 +19,16 @@ function AdminUsers() {
         handleSearchChange,
         handleDelete,
         setShowModal,
+        loading,
     } = useFetchUsers();
 
 useWow();
 
     return (
-        <Container className="py-4 mb-5">
+        <Container className=" mb-5">
             <ToastContainer />
-            <Row>
-                <h2 className="mb-3 unbounded-uniquifier-header wow fadeInLeft">Users</h2>
+            <Row className="">
+                <h1 className="mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft">Users</h1>
                 {/* Search Bar */}
                 <Col xs={12} className="mb-4 unbounded-uniquifier-p">
                     <FormControl
@@ -41,7 +40,11 @@ useWow();
                     />
                 </Col>
 
-                {filteredUsers.length === 0 ? (
+                {loading ? (
+                    <Col xs={12} className="text-center">
+                        <Spinner animation="border" variant="white" />
+                    </Col>
+                ) : filteredUsers.length === 0 ? (
                     <p className="text-muted text-center unbounded-uniquifier-p">No users found.</p>
                 ) : (
                     filteredUsers.map((user) => (

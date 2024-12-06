@@ -58,8 +58,8 @@ function HomePage() {
   return (
     <div>
       {/* Header Section */}
-      <header className="header-section bg-dark text-white text-center py-4 wow fadeInDown" data-wow-duration="1.5s">
-        <h1 className="display-4">Admin  +|- Home</h1>
+      <header className="header-section bg-dark text-white text-center py-4 wow fadeInUp" data-wow-duration="1.0s">
+        <h1 className="display-4 wow fadeInUp" data-wow-duration="1.0s" data-wow-delay="1.0s">Admin  +|- Home</h1>
       </header>
 
       {/* Art Category Sections */}
