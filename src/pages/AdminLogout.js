@@ -47,11 +47,11 @@ function AdminLogout() {
     useWow();
 
     return (
-        <Container className="justify-content-center p-5 m-5">
-            <Col>
+        <Container className="justify-content-center p-5 mb-5 mt-5 gx-5">
+            <Col className='justify-content-center'>
                 <Row className="justify-content-center text-center">
                     {showAlert && (
-                        <Card className="mt-3 wow zoomIn" data-wow-duration="1s" style={{ width: '18rem' }}>
+                        <Card className="mt-3 wow zoomIn" data-wow-duration="1s" style={{ width: '18rem' }} >
                             <Card.Body>
                                 <Alert variant="info">
                                     {message}

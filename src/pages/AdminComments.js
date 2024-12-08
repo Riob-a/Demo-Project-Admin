@@ -29,14 +29,16 @@ function AdminComments() {
     <Container className="justify-content-center mb-5">
       <Row className='mb-4'>
         
-          <h1 className='mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft'>Comments</h1>
+          <h1 className='mb-4 mt-5  unbounded-uniquifier-header wow fadeInLeft'>Comments</h1>
           {/* Search bar */}
+          <Col>
           <FormControl
           placeholder='Search comments by name, email or message...'
           value={searchQuery}
           onChange={handleSearch}
           className="wow fadeInLeft unbounded-uniquifier-p" data-wow-delay="0.5s"
           />
+          </Col>
 
           {deleteError && <Alert variant="danger">{deleteError}</Alert>}
       </Row>

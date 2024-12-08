@@ -25,7 +25,7 @@ function AdminUsers() {
 useWow();
 
     return (
-        <Container className=" mb-5">
+        <Container className="justify-content-center mb-5">
             <ToastContainer />
             <Row className="">
                 <h1 className="mb-4 mt-5 unbounded-uniquifier-header wow fadeInLeft">Users</h1>

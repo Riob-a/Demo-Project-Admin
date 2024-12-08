@@ -26,6 +26,8 @@ const AdminArt = () => {
     <Container className="justify-content-center">
       <h1 className="mt-5 mb-4 unbounded-uniquifier-header wow fadeInLeft">Manage Artworks</h1>
       {error && <Alert variant="danger">{error}</Alert>}
+
+      <Col>
       <Form className="mb-4 unbounded-uniquifier-p">
         <Form.Control
           type="text"
@@ -34,6 +36,8 @@ const AdminArt = () => {
           className="wow fadeInLeft" data-wow-delay="0.5s"
         />
       </Form>
+      </Col>
+      
       {loading ? (
         <Spinner animation="border" role="status" variant="white" className="d-block mx-auto mt-5">
           <span className="visually-hidden">Loading...</span>
@@ -45,7 +49,7 @@ const AdminArt = () => {
               <Alert variant="info unbounded-uniquifier-p">No artworks to display</Alert>
             ) : (
               currentArtworks.map((artwork) => (
-                <Col key={artwork.id} sm={12} md={6} lg={4} className="mb-4 gy-5 gx-5 wow zoomIn">
+                <Col key={artwork.id} sm={12} md={6} lg={4} className="mb-4 gy-5  wow zoomIn">
                   <motion.div
                     className="mx-auto"
                     style={{ width: '21rem', boxShadow: '0 0px 15px rgba(0, 0, 0, 0.5)' }}
