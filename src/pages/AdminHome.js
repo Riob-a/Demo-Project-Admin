@@ -10,9 +10,10 @@ import "./HomePage.css";
 
 // Centralized image URLs
 const imageUrls = {
-  Art: "https://i.pinimg.com/originals/47/17/a8/4717a813263f471b0def42d70c835ad5.gif",
+  Art: "https://i.pinimg.com/736x/78/2b/68/782b68f1519ccfb7f210bb84086142c7.jpg",
   Users: "https://i.pinimg.com/originals/6b/b6/28/6bb628a60417e6979fcca2c1124e8e75.gif",
   Comments: "https://i.pinimg.com/originals/bd/78/b5/bd78b57fa09b08793f3e018bb549b49b.gif",
+  // https://i.pinimg.com/originals/bd/78/b5/bd78b57fa09b08793f3e018bb549b49b.gif
 };
 
 // Lazy-loaded Image component

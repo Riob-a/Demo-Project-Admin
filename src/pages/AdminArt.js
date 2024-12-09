@@ -83,7 +83,7 @@ const AdminArt = () => {
             )}
           </Row>
           {totalPages > 1 && (
-            <Pagination className="justify-content-center unbounded-uniquifier-p ">
+            <Pagination className="justify-content-center unbounded-uniquifier-p p-4">
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item
                   key={index + 1}

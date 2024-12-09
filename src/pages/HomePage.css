@@ -30,16 +30,8 @@ body {
 } */
 
 /* fonts */
-.spicy-rice-regular {
-  font-family: "Spicy Rice", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.rowdies-bold {
-  font-family: "Rowdies", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
+
+
 .unbounded-uniquifier-header {
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
