@@ -53,6 +53,9 @@ function HomePage() {
 
   const navigateToSection = (path) => {
     navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top:0, behavior: "smooth"})
+    }, 0);
   };
 
   return (
