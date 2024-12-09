@@ -80,6 +80,10 @@ export const useFetchArtworks = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behaviour: 'smooth',
+    })
   };
 
   const currentArtworks = filteredArtworks.slice(
