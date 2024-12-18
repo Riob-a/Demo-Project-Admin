@@ -92,6 +92,8 @@ useWow();
                 <Modal.Body>
                     {selectedUser && (
                         <div className="unbounded-uniquifier-p">
+                            <img src={selectedUser.profile_image} alt="Profile" className="profile-image" style={{ width: "150px", height: "150px", borderRadius: "50%" }}/>
+                            <br />
                             <p><strong>Username:</strong> {selectedUser.username}</p>
                             <p><strong>Email:</strong> {selectedUser.email}</p>
                             <p><strong>Role:</strong> {selectedUser.role || "User"}</p>
