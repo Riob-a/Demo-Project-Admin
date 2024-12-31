@@ -22,7 +22,7 @@ const useFetchUsers = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch("https://demo-project-backend-qrd8.onrender.com/api/users", {
+            const response = await fetch("https://demo-project-backend-ude8.onrender.com/api/users", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const useFetchUsers = () => {
 
     const fetchUserDetails = async (userId) => {
         try {
-            const userResponse = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}`, {
+            const userResponse = await fetch(`https://demo-project-backend-ude8.onrender.com/api/users/${userId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -60,7 +60,7 @@ const useFetchUsers = () => {
                 const userData = await userResponse.json();
                 setSelectedUser(userData);
 
-                const artworkResponse = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}/artworks`, {
+                const artworkResponse = await fetch(`https://demo-project-backend-ude8.onrender.com/api/users/${userId}/artworks`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -102,7 +102,7 @@ const useFetchUsers = () => {
 
     const handleDelete = async (userId) => {
         try {
-            const response = await fetch(`https://demo-project-backend-qrd8.onrender.com/api/users/${userId}`, {
+            const response = await fetch(`https://demo-project-backend-ude8.onrender.com/api/users/${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
