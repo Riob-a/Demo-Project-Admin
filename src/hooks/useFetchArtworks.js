@@ -24,10 +24,10 @@ export const useFetchArtworks = () => {
     const fetchArtworks = async () => {
       try {
         const [staticResponse, animatedResponse] = await Promise.all([
-          axios.get('https://demo-project-backend-bl40.onrender.com/api/artworks/static', {
+          axios.get('https://demo-project-backend-production.up.railway.app/api/artworks/static', {
             headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
           }),
-          axios.get('https://demo-project-backend-bl40.onrender.com/api/artworks/animated', {
+          axios.get('https://demo-project-backend-production.up.railway.app/api/artworks/animated', {
             headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
           }),
         ]);
@@ -51,7 +51,7 @@ export const useFetchArtworks = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`https://demo-project-backend-bl40.onrender.com/api/artworks/${id}`, {
+      const response = await axios.delete(`https://demo-project-backend-production.up.railway.app/api/artworks/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` },
       });
       if (response.status === 200) {

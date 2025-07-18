@@ -24,7 +24,7 @@ export const useFetchComments = (token, navigate) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get('https://demo-project-backend-bl40.onrender.com/api/contacts', {
+        const response = await axios.get('https://demo-project-backend-production.up.railway.app/api/contacts', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -48,7 +48,7 @@ export const useFetchComments = (token, navigate) => {
   // Handle delete comment
   const handleDelete = async (commentId) => {
     try {
-      await axios.delete(`https://demo-project-backend-bl40.onrender.com/api/contacts/${commentId}`, {
+      await axios.delete(`https://demo-project-backend-production.up.railway.app/api/contacts/${commentId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

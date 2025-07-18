@@ -13,7 +13,7 @@ function AdminLogout() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    const response = await fetch('https://demo-project-backend-bl40.onrender.com/api/logout', {
+                    const response = await fetch('https://demo-project-backend-production.up.railway.app/api/logout', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
